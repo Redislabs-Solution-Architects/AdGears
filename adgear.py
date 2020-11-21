@@ -11,8 +11,10 @@ def findAd(name):
     while iters < len(ads):
         j = execute("BF.ADD", ads[iters], name)
         if j > 0:
+            execute("XADD", "ADDSTATS", '*', "ad", ads[iters], "score", scores[iters], "name", name)
             return(ads[iters], scores[iters] )
         iters += 1
+    execute("XADD", "ADDSTATS", '*', "ad", "FallBackAd", "score", 0, "name", name)
     return("FallBackAd", 0)
 
 def getDemo(name):
