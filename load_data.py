@@ -1,6 +1,7 @@
 #!/usr/bin/env python3 
 
 from redisbloom.client import Client as RedisBloom
+from redistimeseries.client import Client as RedisTimeseries
 
 import csv
 import redis
@@ -32,8 +33,11 @@ rb = RedisBloom(
     port=redis_port,
     password=redis_password
     )
-
-
+rts = RedisTimeseries( 
+    host=redis_server,
+    port=redis_port,
+    password=redis_password
+    )
 
 
 with open('./users.csv', encoding='utf-8') as csv_file:
@@ -52,6 +56,7 @@ with open('./users.csv', encoding='utf-8') as csv_file:
         line_count += 1
 
 with open('./campaigns.csv', encoding='utf-8') as csv_file:
+    rts.create('TOTALREVENUE')
     csv_reader = csv.reader(csv_file, delimiter=',')
     line_count = 0
     for row in csv_reader:
@@ -61,5 +66,7 @@ with open('./campaigns.csv', encoding='utf-8') as csv_file:
                 {row[2]: row[1]}
             )
             rb.bfCreate(row[2], 0.01, 1000)
+            rb.set("counter:%s" %(row[2].replace(" ", '')), row[3])
+            rts.create("ADVIEW:%s" %(row[2].replace(" ", '')))
         line_count += 1
 

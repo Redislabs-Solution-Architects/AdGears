@@ -49,3 +49,17 @@ python3 app.py
 
 Redis Insight is [running](http://localhost:8001) as well
 
+### Running manually
+
+Getting ad per user:
+
+```
+RG.TRIGGER adserv "Ha Ji-Won"
+```
+
+Adding a new campaign
+
+```
+ZADD campaign:Female:100-200K:30-35 20 "Super Premium Bags"
+SET counter:SuperPremiumBags 100
+```

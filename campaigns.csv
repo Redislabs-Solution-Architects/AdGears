@@ -1,8 +1,8 @@
-Demo,Score,Ad
-"Female:100-200K:30-35",1,"Cheap Bags"
-"Female:100-200K:30-35",3,"Discount Bags"
-"Female:100-200K:30-35",4,"On Sale Bags"
-"Female:100-200K:30-35",6,"Generic Bags"
-"Female:100-200K:30-35",9,"Brand Bags"
-"Female:100-200K:30-35",12,"Luxury Bags"
-"Female:100-200K:30-35",14,"Premium Bags"
+Demo,Score,Ad,Count
+"Female:100-200K:30-35",1,"Cheap Bags",1000
+"Female:100-200K:30-35",3,"Discount Bags",1000
+"Female:100-200K:30-35",4,"On Sale Bags",20
+"Female:100-200K:30-35",6,"Generic Bags",200
+"Female:100-200K:30-35",9,"Brand Bags",100
+"Female:100-200K:30-35",12,"Luxury Bags",500
+"Female:100-200K:30-35",14,"Premium Bags",3

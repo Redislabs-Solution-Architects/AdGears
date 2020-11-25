@@ -9,12 +9,12 @@ def findAd(name):
 
     iters = 0
     while iters < len(ads):
-        j = execute("BF.ADD", ads[iters], name)
+        j = execute("BF.ADD", ads[iters], name.replace(" ", ''))
         if j > 0:
-            execute("XADD", "ADDSTATS", '*', "ad", ads[iters], "score", scores[iters], "name", name)
+            execute("XADD", "ADDSTATS", '*', "ad", ads[iters], "score", scores[iters], "name", name, "campaign", c)
             return(ads[iters], scores[iters] )
         iters += 1
-    execute("XADD", "ADDSTATS", '*', "ad", "FallBackAd", "score", 0, "name", name)
+    execute("XADD", "ADDSTATS", '*', "ad", "FallBackAd", "score", 0, "name", name, "campaign", c)
     return("FallBackAd", 0)
 
 def getDemo(name):

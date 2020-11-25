@@ -9,6 +9,7 @@ Jinja2==2.11.1
 MarkupSafe==1.1.1
 redis==3.5.3
 redisbloom==0.4.0
+redistimeseries==1.4.3
 rmtest==0.7.0
 six==1.14.0
 visitor==0.1.3
