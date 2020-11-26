@@ -1,0 +1,24 @@
+version: '3'
+
+
+services:
+  redis:
+    image: "redislabs/redismod:latest"
+    ports:
+      - "6379:6379"
+  datastore:
+    image: "maguec/adgears:0.1.0"
+    links:
+      - "redis:redis"
+    ports:
+      - "5000:5000"
+    environment:
+        - REDIS_SERVER=redis
+        - REDIS_PORT=6379
+  insight:
+    image: "redislabs/redisinsight:1.8.1"
+    depends_on:
+      - redis
+      - datastore
+    ports:
+      - "8001:8001"
