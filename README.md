@@ -7,8 +7,8 @@
 ### Running Dockerized Version
 
 ```
-git clone https://github.com/maguec/redisearch_demo_and_preso
-cd redisearch_demo_and_preso
+git clone https://github.com/Redislabs-Solution-Architects/AdGears.git
+cd AdGears
 docker-compose up
 ```
 
@@ -41,25 +41,11 @@ python3 app.py
 
 1) [Webapp](http://localhost:5000)
 
-2) Data will automatically load if the key is not already present
+2) Data will automatically load  if it is not already present
 
-3) Start typing in the text box
+3) Start askign for ads
 
 ### Redis Insight
 
 Redis Insight is [running](http://localhost:8001) as well
 
-### Running manually
-
-Getting ad per user:
-
-```
-RG.TRIGGER adserv "Ha Ji-Won"
-```
-
-Adding a new campaign
-
-```
-ZADD campaign:Female:100-200K:30-35 20 "Super Premium Bags"
-SET counter:SuperPremiumBags 100
-```
