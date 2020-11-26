@@ -74,7 +74,7 @@ def load_data():
               rb.sadd("AdStats",row[2])
           line_count += 1
   
-  for gear in ['adgear.py', 'adstats.py']:
+  for gear in ['./adgear.py', './adstats.py']:
       file = open(gear,mode='r')
       g = file.read()
       rdb.execute_command('RG.PYEXECUTE', g)
