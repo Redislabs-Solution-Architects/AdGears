@@ -3,6 +3,7 @@ from flask_bootstrap import Bootstrap
 from flask_nav import Nav
 from flask_nav.elements import Navbar, View
 from redistimeseries.client import Client as RedisTimeseries
+from redisbloom.client import Client as RedisBloom
 
 
 # From our local file
@@ -47,6 +48,11 @@ rts = RedisTimeseries(
     password=redis_password
     )
 
+rb = RedisBloom(
+    host=redis_server,
+    port=redis_port,
+    password=redis_password
+    )
 
 
 nav = Nav()
@@ -56,6 +62,7 @@ topbar = Navbar('',
     View('View Campaigns', 'getcampaign'),
     View('Revenue', 'getrevenue'),
     View('Ad Stats', 'getadstats'),
+    View('New Campaign', 'addcampaign'),
 )
 nav.register_element('top', topbar)
 
@@ -113,6 +120,23 @@ def displayadstats():
       labels.append(time.strftime('%H:%M:%S', time.localtime(x[0])))
       datapoints.append(x[1])
    return render_template('adstats.html', datapoints=datapoints,labels=labels,title="Impressions for %s" %(ad) )
+
+@app.route('/addcampaign')
+def addcampaign():
+   return render_template('addcampaign.html')
+
+@app.route('/insertcampaign', methods = ['POST'])
+def insertcampaign():
+   f = request.form.to_dict()
+   rdb.zadd(
+     "campaign:%s:%s:%s" %(f['sex'], f['income'], f['age']),
+     {f['copy']: f['score']}
+   )
+   rb.bfCreate(f['copy'], 0.01, 1000)
+   rb.set("counter:%s" %(f['copy'].replace(" ", '')), f['limit'])
+   rts.create("ADVIEW:%s" %(f['copy'].replace(" ", '')))
+   rb.sadd("AdStats",f['copy'])
+   return redirect("/campaign", code=302)
 
 if __name__ == '__main__':
    bootstrap.init_app(app)
