@@ -1,0 +1,34 @@
+{% extends "bootstrap/base.html" %}
+{% block title %}Ad Maximization{% endblock %}
+
+{% block navbar %}
+{{ nav.top.render() }}
+{% endblock %}
+
+{% block metas %}
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+{% endblock %}
+
+{% block styles %}
+  <link href="//cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+  <link rel="stylesheet" href="//jqueryui.com/resources/demos/style.css">
+{% endblock %}
+
+{% block content %}
+<div class="container-fluid">
+<table class="table table-dark table-striped w-auto" >
+  <thead class="thead-dark">
+    <tr><th>Ad</th><th>Score</th><th>Remaining Impressions</th></tr>
+  </thead>
+  <tbody>
+    {% for row in campaign|dictsort(false, 'value', reverse=True) %}
+     <tr><td>{{ row[0] }}</td><td>{{ row[1] }}</td><td>{{ counters[row[0]].decode('utf-8') }}<td></tr>
+    {% endfor %}
+  </tbody>
+</table>
+
+</div>
+{% endblock %}
+ 
