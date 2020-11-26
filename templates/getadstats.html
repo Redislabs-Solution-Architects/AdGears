@@ -1,0 +1,46 @@
+{% extends "bootstrap/base.html" %}
+{% block title %}Ad Maximization{% endblock %}
+
+{% block navbar %}
+{{ nav.top.render() }}
+{% endblock %}
+
+{% block metas %}
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+{% endblock %}
+
+{% block styles %}
+  <link href="//cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+  <link rel="stylesheet" href="//jqueryui.com/resources/demos/style.css">
+{% endblock %}
+
+{% block content %}
+<center><table>
+<tr><td>
+<div class="container-fluid">
+  <form action = "/displayadstats" method = "GET">
+    <div class="form-group">
+      <label for="ad">Ad:</label>
+      <select id="ad" name="ad">
+      <option value="">Select an Ad</option>
+      {% for ad in ads %}
+        <option value="{{ ad.decode('utf-8').replace(" ",'') }}">{{ ad.decode('utf-8') }}</option>
+      {% endfor %}
+      </select>
+    </div>
+    <div class="form-group">
+      <p><input type = "submit" value = "Get Ad" /></p>
+    </div>
+  </form>
+</div>
+</td><td>
+<div class="container-fluid">
+<h3>{{ adcopy }}</h3>
+</div>
+</td></tr>
+</table></center>
+
+{% endblock %}
+ 

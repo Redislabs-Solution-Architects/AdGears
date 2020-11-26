@@ -53,8 +53,9 @@ nav = Nav()
 topbar = Navbar('',
     View('Home', 'index'),
     View('Get Ads', 'getads'),
-    View('View Campaign', 'getcampaign'),
+    View('View Campaigns', 'getcampaign'),
     View('Revenue', 'getrevenue'),
+    View('Ad Stats', 'getadstats'),
 )
 nav.register_element('top', topbar)
 
@@ -94,9 +95,24 @@ def getrevenue():
    for x in ts:
       labels.append(time.strftime('%H:%M:%S', time.localtime(x[0])))
       datapoints.append(x[1])
-   print(labels)
    return render_template('revenue.html', datapoints=datapoints,labels=labels )
 
+@app.route('/getadstats')
+def getadstats():
+   ads = rdb.smembers('AdStats')
+   return render_template('getadstats.html', ads=ads)
+
+
+@app.route('/displayadstats')
+def displayadstats():
+   ad = request.args.get('ad')
+   labels = []
+   datapoints = []
+   ts = rts.range("ADVIEW:%s" %(ad), 0, -1, bucket_size_msec=10000)
+   for x in ts:
+      labels.append(time.strftime('%H:%M:%S', time.localtime(x[0])))
+      datapoints.append(x[1])
+   return render_template('adstats.html', datapoints=datapoints,labels=labels,title="Impressions for %s" %(ad) )
 
 if __name__ == '__main__':
    bootstrap.init_app(app)

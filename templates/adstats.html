@@ -1,0 +1,55 @@
+{% extends "bootstrap/base.html" %}
+{% block title %}Ad Maximization{% endblock %}
+
+{% block navbar %}
+{{ nav.top.render() }}
+{% endblock %}
+
+{% block metas %}
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+{% endblock %}
+
+{% block styles %}
+  <link href="//cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
+{% endblock %}
+
+{% block scripts %}
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.3.0/Chart.min.js"></script>
+<script>
+var dates = {{labels|tojson}};
+var revenue = {{datapoints}};
+var ctx = document.getElementById("revenue-chart");
+var myChart = new Chart(ctx, {
+  type: 'line',
+  data: {
+    labels: dates,
+    datasets: [
+      { 
+        data: revenue,
+        label: "Impressions",
+        borderColor: "#3e95cd",
+        fill: false
+      }
+    ]
+  }
+});
+
+</script>
+{% endblock %}
+
+
+{% block content %}
+<div class="container-fluid">
+    <div class="wrapper">
+      <center>
+        <h1>{{ title }}</h1>
+      </center>
+
+      <canvas id="revenue-chart" width="700" height="200"></canvas>
+    </div>
+</div>
+
+</div>
+{% endblock %}
+ 

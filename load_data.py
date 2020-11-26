@@ -71,6 +71,7 @@ def load_data():
               rb.bfCreate(row[2], 0.01, 1000)
               rb.set("counter:%s" %(row[2].replace(" ", '')), row[3])
               rts.create("ADVIEW:%s" %(row[2].replace(" ", '')))
+              rb.sadd("AdStats",row[2])
           line_count += 1
   
   for gear in ['adgear.py', 'adstats.py']:
