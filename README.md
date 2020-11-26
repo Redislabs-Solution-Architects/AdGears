@@ -1,5 +1,28 @@
 ## Running with Docker
 
+### Description
+This application is built to demonstrate how to:
+
+  - Minimize latency for serving real time ads
+  - Maximizing the revenue generated per impression
+  - Illustrate the ability to de-duplicate impressions
+  - Show how to use event based statistics in time series
+
+Utilizing:
+
+- [RedisGears](https://redisgears.io) for customization and optimization
+- [RedisBloom](https://redisbloom.io) for de-duplication
+- [RedisTimeseries](https://redistimeseries.io) for event statistics
+- [Redis Streams](https://redis.io/topics/streams-intro) for event queuing
+- [Python Flask](https://palletsprojects.com/p/flask/) to serve the Web UI
+- [Chart.js](https://www.chartjs.org/) to display data
+
+Goals:
+
+  - Simple, easy to understand code
+  - Detail key points in serving and customizing ads
+
+
 ### Prerequisites 
 - [Docker](https://www.docker.com/products/docker-desktop)
 - [Docker Compose](https://docs.docker.com/compose/install/)
