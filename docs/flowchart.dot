@@ -1,0 +1,94 @@
+digraph G {
+
+  splines=false;
+  
+  submit [
+    label = "Send Username";
+    shape = rect;
+    style = filled;
+    fillcolor = cadetblue1;
+    
+  ];
+
+  intent [
+    label = "Intent\nto Buy?";
+    shape = diamond;
+  ];
+
+  has_intent [
+    label = "Intent Ad";
+  ];
+
+  demo_ad [
+    label = "Demographic Ad";
+  ];
+
+  submit -> intent;
+  has_intent -> intent [ label = "Yes"; dir=back ];
+  intent -> demo_ad [ label = "No" ];
+
+  {
+    rank=same;
+    intent; demo_ad; has_intent;
+  }
+
+  bloom_filter[
+    label = "Unique\nImpression?"
+    shape = diamond;
+  ]
+
+  has_intent -> ad_bucket [ label = "Intent\nBucket"];
+  demo_ad -> ad_bucket [ label = "Demographic\nBucket"];
+  
+  ad_bucket [
+    label = "Ad Bucket";
+    shape = rect;
+  ];
+  
+  ad_campaign [
+    label = "Campaign";
+    shape = rect;
+  ];
+
+  {
+    rank=same;
+    bloom_filter, ad_campaign
+  }
+
+  ad [
+      label = "Serve Ad";
+  ]
+
+  ad_counter [
+      label = "Impressions\nRemaining?";
+      shape = diamond;
+  ]
+
+  stats_stream [
+      label = "Stream\nStatistics";
+  ]
+
+  end_user [
+      label = "End\nUser";
+      shape = rect;
+      style = filled;
+      fillcolor = cadetblue1;
+  ]
+
+  {
+    rank=same;
+    end_user, Timeseries
+  }
+
+  ad_bucket -> ad_campaign [ label = "find\nhighest\nyield"];
+  ad_campaign -> bloom_filter ;
+  bloom_filter -> ad_bucket [ label="No" ]
+  bloom_filter -> ad [ label="Yes" ]
+  ad -> end_user;
+  ad -> ad_counter;
+  ad_counter -> ad_campaign [label = "No\n(Delete\n Campaign)"];
+  ad -> stats_stream [ label = " Asynchronous" ];
+  stats_stream -> Timeseries [ label = " insert\n stats" ];
+
+  
+}
