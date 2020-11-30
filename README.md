@@ -1,5 +1,9 @@
 ## Using Redis Gears to Increase Advertising Revenue
 
+### Documentation
+
+[This Document](docs/DOCUMENTATION.md) contains more detailed information on this demo
+
 ### Description
 This application is built to demonstrate how to:
 
