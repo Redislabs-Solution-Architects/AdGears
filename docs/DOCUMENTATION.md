@@ -22,7 +22,7 @@ Finally, Redis Timeseries can efficiently and quickly store impression timeserie
 
 | Module | Usage | Notes |
 |--|--|--|
-| [RedisGears](https://redisgears.io)| Run all of the Ad serving logic | [Python script](../adgears.py) |
+| [RedisGears](https://redisgears.io)| Run all of the Ad serving logic | [Python script](../adgear.py) |
 | [RedisBloom](https://redisbloom.io)| Check for unique impressions by Campaign and user ID | Client returns 1 if user ID already present |
 | [RedisTimeseries](https://redistimeseries.io)| Storing Revenue and Impression data | Use SUM type for this example |
 
