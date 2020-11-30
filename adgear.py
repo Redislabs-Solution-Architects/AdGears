@@ -19,6 +19,10 @@ def findAd(name):
 
 def getDemo(name):
     u = "user:%s" %(name.replace(" ", ''))
+    # Check to see if user has Intent to Buy
+    i = execute("GET", "%s:intent" %(u))
+    if i != None:
+        return(i)
     d = execute("HMGET",  u, "Sex", "IncomeDemo", "AgeDemo")
     return(":".join(d))
 

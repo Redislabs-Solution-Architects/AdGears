@@ -1,0 +1,54 @@
+{% extends "bootstrap/base.html" %}
+{% block title %}Set Intent to Buy{% endblock %}
+
+{% block navbar %}
+{{ nav.top.render() }}
+{% endblock %}
+
+{% block metas %}
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+{% endblock %}
+
+{% block styles %}
+  <link href="//cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+  <link rel="stylesheet" href="//jqueryui.com/resources/demos/style.css">
+{% endblock %}
+
+{% block content %}
+<center><table>
+<tr><td>
+<div class="container-fluid">
+  <form action = "/insertintent" method = "POST">
+    <div class="form-group">
+      <label for="user">User:</label>
+      <select id="user" name="user">
+      <option value="">Select a User</option>
+      {% for u in userlist %}
+        <option value="{{ u.decode('utf-8') }}">{{ u.decode('utf-8') }}</option>
+      {% endfor %}
+      </select>
+    </div>
+    <div class="form-group">
+      <label for="campaign">Item:</label>
+      <input id="campaign" class="form-control" name="campaign" value="LuxuryAutos">
+    </div>
+    <div class="form-group">
+      <label for="ttl">Time to live (seconds):</label>
+      <input id="ttl" class="form-control" name="ttl" value="10">
+    </div>
+    <div class="form-group">
+      <p><input type = "submit" value = "Get Ad" /></p>
+    </div>
+  </form>
+</div>
+</td><td>
+<div class="container-fluid">
+<h3>{{ adcopy }}</h3>
+</div>
+</td></tr>
+</table></center>
+
+{% endblock %}
+ 

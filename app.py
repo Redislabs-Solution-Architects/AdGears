@@ -63,6 +63,7 @@ topbar = Navbar('',
     View('Revenue', 'getrevenue'),
     View('Ad Stats', 'getadstats'),
     View('New Campaign', 'addcampaign'),
+    View('New Intent', 'addintent'),
 )
 nav.register_element('top', topbar)
 
@@ -137,6 +138,18 @@ def insertcampaign():
    rts.create("ADVIEW:%s" %(f['copy'].replace(" ", '')))
    rb.sadd("AdStats",f['copy'])
    return redirect("/campaign", code=302)
+
+@app.route('/addintent')
+def addintent():
+   userlist = rdb.lrange('USERLIST', 0, 1000)
+   return render_template('addintent.html', userlist=userlist)
+
+@app.route('/insertintent', methods = ['POST'])
+def insertintent():
+   f = request.form.to_dict()
+   rdb.set("user:%s:intent" %(f['user'].replace(" ", '')), f['campaign'], ex=f['ttl'])
+   print(f)
+   return redirect("/ads?user=%s" %(f['user']), code=302)
 
 if __name__ == '__main__':
    bootstrap.init_app(app)

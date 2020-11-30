@@ -6,3 +6,7 @@ Demo,Score,Ad,Count
 "Female:100-200K:30-35",9,"Brand Bags",100
 "Female:100-200K:30-35",12,"Luxury Bags",500
 "Female:100-200K:30-35",14,"Premium Bags",3
+"LuxuryAutos",100,"Luxury Autos",10
+"LuxuryAutos",10,"SUVs",10
+"LuxuryAutos",1,"Compacts",10
+"LuxuryAutos",1,"Junker",10
