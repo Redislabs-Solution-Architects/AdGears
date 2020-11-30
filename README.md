@@ -1,4 +1,4 @@
-## Running with Docker
+## Using Redis Gears to Increase Ad Revenue
 
 ### Description
 This application is built to demonstrate how to:
