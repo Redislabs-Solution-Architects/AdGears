@@ -7,7 +7,7 @@ services:
     ports:
       - "6379:6379"
   datastore:
-    image: "maguec/adgears:0.1.0"
+    image: "maguec/adgears:0.2.0"
     links:
       - "redis:redis"
     ports:
