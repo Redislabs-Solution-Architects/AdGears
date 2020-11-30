@@ -1,4 +1,4 @@
-## Using Redis Gears to Increase Ad Revenue
+## Using Redis Gears to Increase Advertising Revenue
 
 ### Description
 This application is built to demonstrate how to:
