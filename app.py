@@ -114,12 +114,17 @@ def getadstats():
 @app.route('/displayadstats')
 def displayadstats():
    ad = request.args.get('ad')
+   print(ad)
    labels = []
    datapoints = []
-   ts = rts.range("ADVIEW:%s" %(ad), 0, -1, bucket_size_msec=10000)
-   for x in ts:
-      labels.append(time.strftime('%H:%M:%S', time.localtime(x[0])))
-      datapoints.append(x[1])
+   try:
+       ts = rts.range("ADVIEW:%s" %(ad), 0, -1, bucket_size_msec=10000)
+       for x in ts:
+          labels.append(time.strftime('%H:%M:%S', time.localtime(x[0])))
+          datapoints.append(x[1])
+   except:
+       ad = " - None Selected"
+
    return render_template('adstats.html', datapoints=datapoints,labels=labels,title="Impressions for %s" %(ad) )
 
 @app.route('/addcampaign')
