@@ -99,7 +99,7 @@ def getcampaign():
 def getrevenue():
    labels = []
    datapoints = []
-   ts = rts.range('TOTALREVENUE', 0, -1, bucket_size_msec=10000)
+   ts = rts.range('TOTALREVENUE', 0, int(time.time()), bucket_size_msec=10000)
    for x in ts:
       labels.append(time.strftime('%H:%M:%S', time.localtime(x[0])))
       datapoints.append(x[1])
@@ -118,7 +118,7 @@ def displayadstats():
    labels = []
    datapoints = []
    try:
-       ts = rts.range("ADVIEW:%s" %(ad), 0, -1, bucket_size_msec=10000)
+       ts = rts.range("ADVIEW:%s" %(ad), 0, int(time.time()), bucket_size_msec=10000)
        for x in ts:
           labels.append(time.strftime('%H:%M:%S', time.localtime(x[0])))
           datapoints.append(x[1])

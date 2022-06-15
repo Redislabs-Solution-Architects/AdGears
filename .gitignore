@@ -1,4 +1,4 @@
-venv/*
+.venv/*
 .vscode/*
 db/*.log
 db/bulk_operation/*
