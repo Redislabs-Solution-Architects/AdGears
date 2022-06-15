@@ -7,7 +7,7 @@ flask-nav==0.6
 gearsclient @ git+https://github.com/RedisGears/redisgears-py.git@56ce9fe613ee2f4da7c38b6ce06d02cff74bb57c
 hiredis==1.0.1
 itsdangerous==1.1.0
-Jinja2==2.11.1
+Jinja2>=2.11.3
 MarkupSafe==1.1.1
 redis==3.5.3
 redisbloom==0.4.0
